@@ -1,3 +1,8 @@
+# Installation
+
+``npm install eamutils --save``
+
+# Description
 This package will be used for some util functions I reuse in many projects. 
 
 # Functions
