@@ -1,9 +1,13 @@
 {
     "name": "eamutils",
-    "version": "1.0.4",
-    "description": "Personal util functions",
+    "version": "1.0.5",
+    "description": "Some reusable functions in some projects",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/emmab30/mutils.git"
+    },
     "scripts": {
         "build": "tsc",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
