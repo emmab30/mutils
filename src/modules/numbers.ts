@@ -8,7 +8,7 @@
 *   @param replaces Array of strings to replace the default ones (k, m, b, t). It must have 4 elements.
 */
 export function formatNumberToK(num: number, precision: number = 1, replaces: string[] = ['K', 'M', 'B', 'T']): string {
-    if(replaces && replaces.length != 4) throw new Error(`Replacements should be an array of length: 4`);
+    if(replaces && replaces.length !== 4) throw new Error(`Replacements should be an array of length: 4`);
 
     if (num >= 1000000000000) {
         return (num / 1000000000000).toFixed(precision).replace(/\.0$/, '') + replaces[3];
@@ -46,8 +46,8 @@ export const formatNumberCommas = (x: any) => {
 *   Example: number = 5 and size = 2 should return 05. 
 *   Example 2: number = 5 and size = 3 should return 005
 */
-export const padLeadingZeros = (number: any, finalLength: number) => {
-    let s: any = `${number}`;
+export const padLeadingZeros = (num: any, finalLength: number) => {
+    let s: any = `${num}`;
     while (s.length < finalLength) s = `0${s}`;
     return s;
 }

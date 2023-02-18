@@ -10,6 +10,6 @@ export const getAddresses = (text: string): any[] | null => {
 /*
 *   Normalize an address to checksum format
 */
-export const address = (address: string) => {
-    return web3.utils.toChecksumAddress(address);
+export const address = (addr: string) => {
+    return web3.utils.toChecksumAddress(addr);
 }
