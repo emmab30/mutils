@@ -1,3 +1,4 @@
+const { ethers } = require('ethers');
 const web3 = require('web3');
 
 export const getAddresses = (text: string): any[] | null => {
@@ -13,3 +14,6 @@ export const getAddresses = (text: string): any[] | null => {
 export const address = (addr: string) => {
     return web3.utils.toChecksumAddress(addr);
 };
+
+export const Contract = require('./contract');
+export const Provider = require('./provider');
