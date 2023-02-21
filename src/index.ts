@@ -1,3 +1,3 @@
-export const number = require('./modules/numbers');
-export const string = require('./modules/strings');
-export const web3 = require('./modules/w3');
+export const muNumber = require('./modules/numbers');
+export const muString = require('./modules/strings');
+export const muWeb3 = require('./modules/w3');
