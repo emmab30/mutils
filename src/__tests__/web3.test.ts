@@ -50,6 +50,33 @@ test('Querying token contract', async () => {
     expect(parseFloat(balance)).toBeGreaterThan(0);
 });
 
+test('Getting unexisting provider then creating it and query it', async () => {
+    let provider = web3Utils.Provider.getProviderByChainId(20439);
+    expect(provider).toBeUndefined();
+
+    // Configure default providers and also add this one
+    web3Utils.Provider.configureProviders([
+        ...web3Utils.Provider.getDefaultProviders(),
+        web3Utils.Provider.createProvider({
+            chainId: 25,
+            rpcs: ['https://node.croswap.com/rpc']
+        })
+    ]);
+
+    provider = web3Utils.Provider.getProviderByChainId(25);
+    expect(provider).toBeTruthy();
+
+    const token = web3Utils.Contract.getTokenContractFromProvider(
+        '0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23',
+        provider
+    );
+    const name = await token.name();
+    const symbol = await token.symbol();
+
+    expect(name).toBe('Wrapped CRO');
+    expect(symbol).toBe('WCRO');
+});
+
 test('Querying custom contract (no token, no router, no factory)', async () => {
     const provider = web3Utils.Provider.getProviderByChainId(1);
     const contract = web3Utils.Contract.getContractFromAddress(

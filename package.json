@@ -1,6 +1,6 @@
 {
     "name": "eamutils",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Some reusable functions in some projects",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -9,7 +9,8 @@
         "url": "git+https://github.com/emmab30/mutils.git"
     },
     "scripts": {
-        "build": "tsc",
+        "build": "rm -rf lib && tsc && npm run cp-assets",
+        "cp-assets": "cp -R src/modules/w3/abis ./lib/modules/w3/abis/",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
         "lint": "tslint -p tsconfig.json",
         "test": "jest --config jestconfig.json",
