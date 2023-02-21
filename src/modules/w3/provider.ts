@@ -12,8 +12,8 @@ export interface IProvider {
 }
 
 /*
-*   Create a new provider object
-*/
+ *   Create a new provider object
+ */
 export const createProvider = (provider: IProvider): IProvider => {
     return provider;
 };
@@ -57,15 +57,18 @@ export const getDefaultProviders = (): IProvider[] => {
             name: 'Binance Smart Chain Testnet',
             explorer: 'https://testnet.bscscan.com',
             chainId: 97,
-            rpcs: ['https://data-seed-prebsc-1-s1.binance.org:8545/', 'https://data-seed-prebsc-2-s1.binance.org:8545/'],
+            rpcs: [
+                'https://data-seed-prebsc-1-s1.binance.org:8545/',
+                'https://data-seed-prebsc-2-s1.binance.org:8545/',
+            ],
             router: '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3',
             factory: '0x6725F303b657a9451d8BA641348b6761A6CC7a17',
             factory_abi: require('./abis/erc20.factory.json'),
             router_abi: require('./abis/erc20.router.json'),
             multicall: '0x6e5bb1a5ad6f68a8d7d6a5e47750ec15773d6042',
-        })
-    ]
-}
+        }),
+    ];
+};
 
 let Providers: IProvider[] = getDefaultProviders();
 
@@ -76,7 +79,7 @@ let Providers: IProvider[] = getDefaultProviders();
 export const configureProviders = (providers: IProvider[]) => {
     Providers = providers;
     return Providers;
-}
+};
 
 /*
  *   Get provider by chain id

@@ -41,10 +41,7 @@ test('Querying factory contract from provider', async () => {
 
 test('Querying token contract', async () => {
     const provider = muWeb3.Provider.getProviderByChainId(1);
-    const token = muWeb3.Contract.getTokenContractFromProvider(
-        '0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f',
-        provider,
-    );
+    const token = muWeb3.Contract.getTokenContractFromProvider('0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f', provider);
     let balance = await token.balanceOf('0x4527106ae1A661A9D2Ffc22575baCdaaCb5e51e0');
     balance = ethers.utils.formatUnits(balance, 18);
     expect(parseFloat(balance)).toBeGreaterThan(0);
@@ -59,17 +56,14 @@ test('Getting unexisting provider then creating it and query it', async () => {
         ...muWeb3.Provider.getDefaultProviders(),
         muWeb3.Provider.createProvider({
             chainId: 25,
-            rpcs: ['https://node.croswap.com/rpc']
-        })
+            rpcs: ['https://node.croswap.com/rpc'],
+        }),
     ]);
 
     provider = muWeb3.Provider.getProviderByChainId(25);
     expect(provider).toBeTruthy();
 
-    const token = muWeb3.Contract.getTokenContractFromProvider(
-        '0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23',
-        provider
-    );
+    const token = muWeb3.Contract.getTokenContractFromProvider('0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23', provider);
     const name = await token.name();
     const symbol = await token.symbol();
 
