@@ -63,12 +63,23 @@ test('Getting unexisting provider then creating it and query it', async () => {
     provider = muWeb3.Provider.getProviderByChainId(25);
     expect(provider).toBeTruthy();
 
-    const token = muWeb3.Contract.getTokenContractFromProvider('0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23', provider);
-    const name = await token.name();
-    const symbol = await token.symbol();
+    let token = muWeb3.Contract.getTokenContractFromProvider('0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23', provider);
+    let name = await token.name();
+    let symbol = await token.symbol();
 
     expect(name).toBe('Wrapped CRO');
     expect(symbol).toBe('WCRO');
+
+    // Test it on Arbitrum One
+    provider = muWeb3.Provider.getProviderByChainId(42161);
+    expect(provider).toBeTruthy();
+
+    token = muWeb3.Contract.getTokenContractFromProvider('0x82af49447d8a07e3bd95bd0d56f35241523fbab1', provider);
+    name = await token.name();
+    symbol = await token.symbol();
+
+    expect(name).toBe('Wrapped Ether');
+    expect(symbol).toBe('WETH');
 });
 
 test('Querying custom contract (no token, no router, no factory)', async () => {
