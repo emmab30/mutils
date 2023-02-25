@@ -24,7 +24,7 @@ export const getDefaultProviders = (): IProvider[] => {
         return createProvider({
             ...i,
             factory_abi: require(i.factory_abi),
-            router_abi: require(i.router_abi)
+            router_abi: require(i.router_abi),
         });
     });
 };
