@@ -1,11 +1,11 @@
-import { getProviders } from "./files/providers_list";
+import { getProviders } from './files/providers_list';
 
 export interface IProvider {
     chainId: number;
     rpcs: string[];
     logo: string;
     // Optional data
-    weth?: IWETH,
+    weth?: IWETH;
     name?: string;
     explorer?: string;
     router?: string;

@@ -84,97 +84,93 @@ test('Getting unexisting provider then creating it and query it', async () => {
 
 test('Querying custom contract (no token, no router, no factory)', async () => {
     const provider = muWeb3.Provider.getProviderByChainId(1);
-    const contract = muWeb3.Contract.getContractFromAddress(
-        provider,
-        '0x5e227ad1969ea493b43f840cff78d08a6fc17796',
-        [
-            {
-                constant: false,
-                inputs: [
-                    {
-                        components: [
-                            { internalType: 'address', name: 'target', type: 'address' },
-                            { internalType: 'bytes', name: 'callData', type: 'bytes' },
-                        ],
-                        internalType: 'struct Multicall.Call[]',
-                        name: 'calls',
-                        type: 'tuple[]',
-                    },
-                ],
-                name: 'aggregate',
-                outputs: [
-                    { internalType: 'uint256', name: 'blockNumber', type: 'uint256' },
-                    { internalType: 'bytes[]', name: 'returnData', type: 'bytes[]' },
-                ],
-                payable: false,
-                stateMutability: 'nonpayable',
-                type: 'function',
-            },
-            {
-                constant: true,
-                inputs: [{ internalType: 'uint256', name: 'blockNumber', type: 'uint256' }],
-                name: 'getBlockHash',
-                outputs: [{ internalType: 'bytes32', name: 'blockHash', type: 'bytes32' }],
-                payable: false,
-                stateMutability: 'view',
-                type: 'function',
-            },
-            {
-                constant: true,
-                inputs: [],
-                name: 'getCurrentBlockCoinbase',
-                outputs: [{ internalType: 'address', name: 'coinbase', type: 'address' }],
-                payable: false,
-                stateMutability: 'view',
-                type: 'function',
-            },
-            {
-                constant: true,
-                inputs: [],
-                name: 'getCurrentBlockDifficulty',
-                outputs: [{ internalType: 'uint256', name: 'difficulty', type: 'uint256' }],
-                payable: false,
-                stateMutability: 'view',
-                type: 'function',
-            },
-            {
-                constant: true,
-                inputs: [],
-                name: 'getCurrentBlockGasLimit',
-                outputs: [{ internalType: 'uint256', name: 'gaslimit', type: 'uint256' }],
-                payable: false,
-                stateMutability: 'view',
-                type: 'function',
-            },
-            {
-                constant: true,
-                inputs: [],
-                name: 'getCurrentBlockTimestamp',
-                outputs: [{ internalType: 'uint256', name: 'timestamp', type: 'uint256' }],
-                payable: false,
-                stateMutability: 'view',
-                type: 'function',
-            },
-            {
-                constant: true,
-                inputs: [{ internalType: 'address', name: 'addr', type: 'address' }],
-                name: 'getEthBalance',
-                outputs: [{ internalType: 'uint256', name: 'balance', type: 'uint256' }],
-                payable: false,
-                stateMutability: 'view',
-                type: 'function',
-            },
-            {
-                constant: true,
-                inputs: [],
-                name: 'getLastBlockHash',
-                outputs: [{ internalType: 'bytes32', name: 'blockHash', type: 'bytes32' }],
-                payable: false,
-                stateMutability: 'view',
-                type: 'function',
-            },
-        ]
-    );
+    const contract = muWeb3.Contract.getContractFromAddress(provider, '0x5e227ad1969ea493b43f840cff78d08a6fc17796', [
+        {
+            constant: false,
+            inputs: [
+                {
+                    components: [
+                        { internalType: 'address', name: 'target', type: 'address' },
+                        { internalType: 'bytes', name: 'callData', type: 'bytes' },
+                    ],
+                    internalType: 'struct Multicall.Call[]',
+                    name: 'calls',
+                    type: 'tuple[]',
+                },
+            ],
+            name: 'aggregate',
+            outputs: [
+                { internalType: 'uint256', name: 'blockNumber', type: 'uint256' },
+                { internalType: 'bytes[]', name: 'returnData', type: 'bytes[]' },
+            ],
+            payable: false,
+            stateMutability: 'nonpayable',
+            type: 'function',
+        },
+        {
+            constant: true,
+            inputs: [{ internalType: 'uint256', name: 'blockNumber', type: 'uint256' }],
+            name: 'getBlockHash',
+            outputs: [{ internalType: 'bytes32', name: 'blockHash', type: 'bytes32' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+        },
+        {
+            constant: true,
+            inputs: [],
+            name: 'getCurrentBlockCoinbase',
+            outputs: [{ internalType: 'address', name: 'coinbase', type: 'address' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+        },
+        {
+            constant: true,
+            inputs: [],
+            name: 'getCurrentBlockDifficulty',
+            outputs: [{ internalType: 'uint256', name: 'difficulty', type: 'uint256' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+        },
+        {
+            constant: true,
+            inputs: [],
+            name: 'getCurrentBlockGasLimit',
+            outputs: [{ internalType: 'uint256', name: 'gaslimit', type: 'uint256' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+        },
+        {
+            constant: true,
+            inputs: [],
+            name: 'getCurrentBlockTimestamp',
+            outputs: [{ internalType: 'uint256', name: 'timestamp', type: 'uint256' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+        },
+        {
+            constant: true,
+            inputs: [{ internalType: 'address', name: 'addr', type: 'address' }],
+            name: 'getEthBalance',
+            outputs: [{ internalType: 'uint256', name: 'balance', type: 'uint256' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+        },
+        {
+            constant: true,
+            inputs: [],
+            name: 'getLastBlockHash',
+            outputs: [{ internalType: 'bytes32', name: 'blockHash', type: 'bytes32' }],
+            payable: false,
+            stateMutability: 'view',
+            type: 'function',
+        },
+    ]);
     let currentBlockGasLimit = await contract.getCurrentBlockGasLimit();
     expect(parseFloat(currentBlockGasLimit)).toBeGreaterThan(0);
 });
@@ -188,7 +184,7 @@ test('Get token price', async () => {
         '0x156ab3346823b651294766e23e6cf87254d68962', // LUNA
         // provider.weth.address, // WETH
         provider.base_pairs[0], // USDT
-        1000000
+        1000000,
     );
     console.log(`1M LUNA to USDT on BSC: ${parseFloat(price)}`);
     expect(parseFloat(price)).toBeGreaterThan(0);
