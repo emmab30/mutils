@@ -19,13 +19,7 @@ export const getRouterFromProvider = (provider: typeof IProvider) => {
     return contract;
 };
 
-export const getTokenContractFromProvider = (address: string, provider: typeof IProvider) => {
-    const rpc = new ethers.providers.JsonRpcProvider(provider.rpcs[0]);
-    const contract = new ethers.Contract(address, ABIS.getCommonTokenABI(), rpc);
-    return contract;
-};
-
-export const getContractFromAddress = (address: string, abi: any, provider: typeof IProvider) => {
+export const getContractFromAddress = (provider: typeof IProvider, address: string, abi: any) => {
     const rpc = new ethers.providers.JsonRpcProvider(provider.rpcs[0]);
     return new ethers.Contract(address, abi, rpc);
 };

@@ -41,7 +41,7 @@ test('Querying factory contract from provider', async () => {
 
 test('Querying token contract', async () => {
     const provider = muWeb3.Provider.getProviderByChainId(1);
-    const token = muWeb3.Contract.getTokenContractFromProvider('0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f', provider);
+    const token = muWeb3.Token.getContract(provider, '0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f');
     let balance = await token.balanceOf('0x4527106ae1A661A9D2Ffc22575baCdaaCb5e51e0');
     balance = ethers.utils.formatUnits(balance, 18);
     expect(parseFloat(balance)).toBeGreaterThan(0);
@@ -63,7 +63,7 @@ test('Getting unexisting provider then creating it and query it', async () => {
     provider = muWeb3.Provider.getProviderByChainId(25);
     expect(provider).toBeTruthy();
 
-    let token = muWeb3.Contract.getTokenContractFromProvider('0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23', provider);
+    let token = muWeb3.Token.getContract(provider, '0x5c7f8a570d578ed84e63fdfa7b1ee72deae1ae23');
     let name = await token.name();
     let symbol = await token.symbol();
 
@@ -74,7 +74,7 @@ test('Getting unexisting provider then creating it and query it', async () => {
     provider = muWeb3.Provider.getProviderByChainId(42161);
     expect(provider).toBeTruthy();
 
-    token = muWeb3.Contract.getTokenContractFromProvider('0x82af49447d8a07e3bd95bd0d56f35241523fbab1', provider);
+    token = muWeb3.Token.getContract(provider, '0x82af49447d8a07e3bd95bd0d56f35241523fbab1');
     name = await token.name();
     symbol = await token.symbol();
 
@@ -85,6 +85,7 @@ test('Getting unexisting provider then creating it and query it', async () => {
 test('Querying custom contract (no token, no router, no factory)', async () => {
     const provider = muWeb3.Provider.getProviderByChainId(1);
     const contract = muWeb3.Contract.getContractFromAddress(
+        provider,
         '0x5e227ad1969ea493b43f840cff78d08a6fc17796',
         [
             {
@@ -172,9 +173,23 @@ test('Querying custom contract (no token, no router, no factory)', async () => {
                 stateMutability: 'view',
                 type: 'function',
             },
-        ],
-        provider,
+        ]
     );
     let currentBlockGasLimit = await contract.getCurrentBlockGasLimit();
     expect(parseFloat(currentBlockGasLimit)).toBeGreaterThan(0);
+});
+
+test('Get token price', async () => {
+    let provider = muWeb3.Provider.getProviderByChainId(56);
+    expect(provider).toBeTruthy();
+
+    let price = await muWeb3.Token.getPrice(
+        provider,
+        '0x156ab3346823b651294766e23e6cf87254d68962', // LUNA
+        // provider.weth.address, // WETH
+        provider.base_pairs[0], // USDT
+        1000000
+    );
+    console.log(`1M LUNA to USDT on BSC: ${parseFloat(price)}`);
+    expect(parseFloat(price)).toBeGreaterThan(0);
 });

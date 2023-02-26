@@ -83,16 +83,44 @@ const provider = Provider.getProviderByChainId(1);
 const factory = Contract.getFactoryFromProvider(provider);
 ```
 
-- To get a token contract instance, you can do this:
-
-```
-const provider = web3Utils.Provider.getProviderByChainId(1);
-const token = web3Utils.Contract.getTokenContractFromProvider('0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f', provider);
-```
-
 - To get a custom contract instance, you can do this:
 
 ```
 const provider = web3Utils.Provider.getProviderByChainId(1);
-const contract = web3Utils.Contract.getContractFromAddress(SC_CUSTOM_ADDRESS, SC_CUSTOM_ABI, provider);
+const contract = web3Utils.Contract.getContractFromAddress(provider, SC_CUSTOM_ADDRESS, SC_CUSTOM_ABI);
+```
+
+## Tokens
+
+- To get a token contract instance, you can do this:
+
+```
+const provider = web3Utils.Provider.getProviderByChainId(1);
+const token = web3Utils.Token.getContract(provider, '0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f');
+```
+
+- Now you can fetch the price for a token, given a provider and two addresses
+
+This method will fetch the price based on a baseToken and quoteToken
+
+```
+const provider = web3Utils.Provider.getProviderByChainId(56);
+const wbnb = '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c';
+const usdt = '0x55d398326f99059ff775485246999027b3197955';
+const amountWBNB = 1;
+const price = web3Utils.Token.getPrice(provider, wbnb, usdt, amountWBNB);
+
+// Returns the amount of usdt needed to swap for a WBNB.
+```
+
+- Also, you can fetch the price given a path
+
+```
+const provider = web3Utils.Provider.getProviderByChainId(56);
+const wbnb = '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c';
+const usdt = '0x55d398326f99059ff775485246999027b3197955';
+const amountWBNB = 1;
+const price = web3Utils.Token.getPriceUsingPath(provider, [wbnb, usdt], amountWBNB);
+
+// Returns the amount of usdt needed to swap for a WBNB.
 ```

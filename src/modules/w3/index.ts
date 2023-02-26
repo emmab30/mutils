@@ -10,10 +10,11 @@ export const getAddresses = (text: string): any[] | null => {
 /*
  *   Normalize an address to checksum format
  */
-export const address = (addr: string) => {
+export const address = (addr: string | undefined) => {
     return web3.utils.toChecksumAddress(addr);
 };
 
 export const ABI = require('./abis');
 export const Contract = require('./contract');
+export const Token = require('./token');
 export const Provider = require('./provider');

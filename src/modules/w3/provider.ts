@@ -1,7 +1,11 @@
+import { getProviders } from "./files/providers_list";
+
 export interface IProvider {
     chainId: number;
     rpcs: string[];
+    logo: string;
     // Optional data
+    weth?: IWETH,
     name?: string;
     explorer?: string;
     router?: string;
@@ -9,6 +13,14 @@ export interface IProvider {
     factory_abi?: string;
     router_abi?: string;
     multicall?: string;
+    base_pairs?: string[];
+}
+
+export interface IWETH {
+    address: string;
+    name: string;
+    symbol: string;
+    decimals: number;
 }
 
 /*
@@ -19,7 +31,7 @@ export const createProvider = (provider: IProvider): IProvider => {
 };
 
 export const getDefaultProviders = (): IProvider[] => {
-    const providers = require('./files/providers.json');
+    const providers = getProviders();
     return providers.map((i: any) => {
         return createProvider({
             ...i,

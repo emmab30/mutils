@@ -10,7 +10,7 @@
     },
     "scripts": {
         "build": "rm -rf lib && tsc && npm run cp-assets",
-        "cp-assets": "cp -R src/modules/w3/abis ./lib/modules/w3/abis/",
+        "cp-assets": "cp -R src/modules/w3/files ./lib/modules/w3/files",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
         "lint": "tslint -p tsconfig.json",
         "test": "jest --config jestconfig.json",
